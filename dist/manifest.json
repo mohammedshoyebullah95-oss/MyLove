@@ -1,0 +1,23 @@
+{
+  "name": "Love Hub ❤️",
+  "short_name": "Love Hub",
+  "description": "A digital sanctuary for our joy",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#060D18",
+  "theme_color": "#6EC1E4",
+  "icons": [
+    {
+      "src": "https://picsum.photos/seed/love/192/192",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://picsum.photos/seed/love/512/512",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

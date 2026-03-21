@@ -1,0 +1,16 @@
+{
+  "messages": [
+    {
+      "id": "1",
+      "sender": "Admin",
+      "text": "Welcome to the Eid Celebration App! 🌙",
+      "timestamp": "2026-03-21T07:00:00Z"
+    },
+    {
+      "id": "2",
+      "sender": "System",
+      "text": "Complete activities to earn rewards and unlock special messages.",
+      "timestamp": "2026-03-21T07:05:00Z"
+    }
+  ]
+}
