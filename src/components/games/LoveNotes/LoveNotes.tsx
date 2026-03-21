@@ -134,7 +134,7 @@ export function LoveNotes({ onClose }: LoveNotesProps) {
         }
 
         if (score >= 10 && !completedActivities.includes("love-notes-perfect")) {
-          updateData.rewardAmount = increment(15);
+          updateData.rewardAmount = increment(30);
           updateData.completedActivities = arrayUnion("love-notes-perfect");
         }
 

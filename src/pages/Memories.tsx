@@ -75,9 +75,9 @@ function PhotoCard({ photo, index }: { photo: MemoryPhoto; index: number }) {
 
       {/* Caption & Date */}
       <div className="absolute bottom-0 left-0 right-0 p-5">
-        <p className="text-white font-semibold text-sm drop-shadow-lg">
+        {/* <p className="text-white font-semibold text-sm drop-shadow-lg">
           {photo.caption}
-        </p>
+        </p> */}
         <p className="text-white/60 text-xs font-medium mt-1">
           {new Date(photo.date).toLocaleDateString("en-US", {
             year: "numeric",
@@ -119,8 +119,8 @@ export function Memories() {
       // e.g. path = "/src/assets/memories/2023-01-01_Happy-New-Year.jpg"
       const filename = path.split('/').pop() || '';
       const nameWithoutExt = filename.split('.').slice(0, -1).join('.');
-      
-      let dateStr = new Date().toISOString(); 
+
+      let dateStr = new Date().toISOString();
       let caption = nameWithoutExt;
 
       if (nameWithoutExt.includes('_')) {
@@ -178,8 +178,8 @@ export function Memories() {
         <button
           onClick={() => setShowLetter(true)}
           className={`flex-1 py-3 rounded-2xl text-sm font-bold transition-all ${showLetter
-              ? "bg-gradient-to-r from-love-pink to-love-rose text-white shadow-lg shadow-love-pink/20"
-              : "liquid-glass text-eid-gray"
+            ? "bg-gradient-to-r from-love-pink to-love-rose text-white shadow-lg shadow-love-pink/20"
+            : "liquid-glass text-eid-gray"
             }`}
         >
           💌 Love Letter
@@ -187,8 +187,8 @@ export function Memories() {
         <button
           onClick={() => setShowLetter(false)}
           className={`flex-1 py-3 rounded-2xl text-sm font-bold transition-all ${!showLetter
-              ? "bg-gradient-to-r from-eid-accent to-eid-accent2 text-white shadow-lg shadow-eid-accent/20"
-              : "liquid-glass text-eid-gray"
+            ? "bg-gradient-to-r from-eid-accent to-eid-accent2 text-white shadow-lg shadow-eid-accent/20"
+            : "liquid-glass text-eid-gray"
             }`}
         >
           📸 Gallery
@@ -262,7 +262,7 @@ export function Memories() {
             transition={{ duration: 0.4 }}
           >
             {photos.length > 0 ? (
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 gap-3">
                 {photos.map((photo, i) => (
                   <PhotoCard key={photo.src} photo={photo} index={i} />
                 ))}
