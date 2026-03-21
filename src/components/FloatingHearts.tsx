@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 
+// Reduced from 18 → 8 particles for mobile GPU savings
 const PARTICLES = [
   { emoji: "💕", size: "text-lg" },
   { emoji: "💖", size: "text-base" },
@@ -8,26 +9,16 @@ const PARTICLES = [
   { emoji: "🌸", size: "text-base" },
   { emoji: "💜", size: "text-sm" },
   { emoji: "💫", size: "text-xs" },
-  { emoji: "🫧", size: "text-base" },
   { emoji: "❤️", size: "text-sm" },
-  { emoji: "🌙", size: "text-lg" },
-  { emoji: "💕", size: "text-sm" },
-  { emoji: "✨", size: "text-lg" },
-  { emoji: "💗", size: "text-xs" },
-  { emoji: "🌸", size: "text-sm" },
-  { emoji: "💖", size: "text-base" },
-  { emoji: "💫", size: "text-sm" },
-  { emoji: "❤️", size: "text-xs" },
-  { emoji: "🫧", size: "text-sm" },
 ];
 
 export function FloatingHearts() {
   const particles = useMemo(() => {
     return PARTICLES.map((p, i) => ({
       ...p,
-      left: `${(i * 5.5 + Math.random() * 3) % 100}%`,
-      delay: `${i * 1.3 + Math.random() * 3}s`,
-      duration: `${10 + Math.random() * 8}s`,
+      left: `${(i * 12 + Math.random() * 5) % 100}%`,
+      delay: `${i * 2 + Math.random() * 4}s`,
+      duration: `${12 + Math.random() * 8}s`,
     }));
   }, []);
 
@@ -41,6 +32,7 @@ export function FloatingHearts() {
             left: p.left,
             animationDelay: p.delay,
             animationDuration: p.duration,
+            willChange: "transform",
           }}
         >
           {p.emoji}

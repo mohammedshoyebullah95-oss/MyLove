@@ -12,13 +12,17 @@ import { db } from "@/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { LoginPrompt } from "@/components/LoginPrompt";
 
-// ─── 3D Tilt Hook ───
+// ─── 3D Tilt Hook (desktop only) ───
 function useTilt() {
   const ref = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0, glareX: 50, glareY: 50 });
+  // Only enable tilt on non-touch devices (saves re-renders on mobile)
+  const [isTouchDevice] = useState(() =>
+    typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches
+  );
 
   const handleMove = (clientX: number, clientY: number) => {
-    if (!ref.current) return;
+    if (!ref.current || isTouchDevice) return;
     const rect = ref.current.getBoundingClientRect();
     const x = (clientX - rect.left) / rect.width;
     const y = (clientY - rect.top) / rect.height;
@@ -32,13 +36,10 @@ function useTilt() {
   };
 
   const handleMouseMove = (e: MouseEvent) => handleMove(e.clientX, e.clientY);
-  const handleTouchMove = (e: TouchEvent) => {
-    const touch = e.touches[0];
-    if (touch) handleMove(touch.clientX, touch.clientY);
-  };
+  const handleTouchMove = (_e: TouchEvent) => {}; // No-op on mobile
   const handleLeave = () => setTilt({ rotateX: 0, rotateY: 0, glareX: 50, glareY: 50 });
 
-  return { ref, tilt, handleMouseMove, handleTouchMove, handleLeave };
+  return { ref, tilt, handleMouseMove, handleTouchMove, handleLeave, isTouchDevice };
 }
 
 // ─── Days Together Counter ───
@@ -75,6 +76,9 @@ export function Home() {
       setShowLoginPrompt(true);
       return;
     }
+    // Scroll to top so the game overlay opens from the top of screen
+    const mainEl = document.querySelector("main");
+    if (mainEl) mainEl.scrollTo({ top: 0, behavior: "smooth" });
     setActiveGame(gameId);
   };
 
@@ -121,7 +125,7 @@ export function Home() {
       >
         {/* Logo Orb */}
         <motion.div variants={stagger.item}>
-          <div className="w-20 h-20 liquid-glass-solid rounded-[28px] flex items-center justify-center mb-3 relative overflow-hidden group animate-glow-pulse">
+          <div className="w-20 h-20 liquid-glass-solid rounded-[28px] flex items-center justify-center mb-3 relative overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-br from-love-pink/20 via-transparent to-eid-accent/15" />
             <div className="absolute inset-0 shadow-[inset_0_2px_4px_rgba(255,255,255,0.15)]" />
             <Heart className="w-9 h-9 text-love-pink fill-love-pink absolute bottom-2.5 left-3 drop-shadow-[0_0_12px_rgba(255,107,157,0.5)] group-hover:scale-110 transition-transform animate-heartbeat" />
@@ -158,16 +162,7 @@ export function Home() {
           <span className="text-xs">💕</span>
         </motion.div>
 
-        {/* Floating sparkles */}
-        <div className="absolute top-4 left-8 animate-sparkle" style={{ animationDelay: "0s" }}>
-          <Sparkles className="w-4 h-4 text-eid-gold/30" />
-        </div>
-        <div className="absolute top-12 right-10 animate-sparkle" style={{ animationDelay: "1s" }}>
-          <Sparkles className="w-3 h-3 text-love-pink/30" />
-        </div>
-        <div className="absolute top-28 left-16 animate-sparkle" style={{ animationDelay: "2s" }}>
-          <Sparkles className="w-3.5 h-3.5 text-eid-accent2/30" />
-        </div>
+        {/* Floating sparkles — removed for mobile GPU savings */}
       </motion.div>
 
       {/* Greeting Card — with 3D Tilt */}
@@ -177,22 +172,24 @@ export function Home() {
         transition={{ delay: 0.2 }}
         ref={tiltCard.ref}
         onMouseMove={tiltCard.handleMouseMove}
-        onTouchMove={tiltCard.handleTouchMove}
         onMouseLeave={tiltCard.handleLeave}
-        onTouchEnd={tiltCard.handleLeave}
         style={{
-          transform: `perspective(800px) rotateX(${tiltCard.tilt.rotateX}deg) rotateY(${tiltCard.tilt.rotateY}deg)`,
+          transform: tiltCard.isTouchDevice
+            ? undefined
+            : `perspective(800px) rotateX(${tiltCard.tilt.rotateX}deg) rotateY(${tiltCard.tilt.rotateY}deg)`,
           transition: "transform 0.15s ease-out",
         }}
         className="liquid-glass-subtle rounded-[28px] p-7 relative overflow-hidden group iridescent-border will-change-transform"
       >
-        {/* Interactive glare effect */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-30 group-hover:opacity-60 transition-opacity duration-300"
-          style={{
-            background: `radial-gradient(circle at ${tiltCard.tilt.glareX}% ${tiltCard.tilt.glareY}%, rgba(255,255,255,0.25) 0%, transparent 60%)`,
-          }}
-        />
+        {/* Interactive glare effect — desktop only */}
+        {!tiltCard.isTouchDevice && (
+          <div
+            className="absolute inset-0 pointer-events-none opacity-30 group-hover:opacity-60 transition-opacity duration-300"
+            style={{
+              background: `radial-gradient(circle at ${tiltCard.tilt.glareX}% ${tiltCard.tilt.glareY}%, rgba(255,255,255,0.25) 0%, transparent 60%)`,
+            }}
+          />
+        )}
 
         {/* Inner glow */}
         <div className="absolute inset-0 bg-gradient-to-br from-love-pink/5 via-transparent to-eid-accent2/5 pointer-events-none" />

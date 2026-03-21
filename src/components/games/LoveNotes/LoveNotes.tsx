@@ -243,9 +243,11 @@ export function LoveNotes({ onClose }: LoveNotesProps) {
                   className="absolute w-16 h-16 flex items-center justify-center cursor-pointer"
                   style={{
                     left: `${note.x}%`,
+                    willChange: "transform",
                   }}
                 >
-                  <div className="w-14 h-14 liquid-glass-solid rounded-2xl flex items-center justify-center animate-float relative group shadow-[0_0_20px_rgba(255,107,157,0.2)]">
+                  {/* Removed animate-float: framer-motion already handles the movement */}
+                  <div className="w-14 h-14 liquid-glass-solid rounded-2xl flex items-center justify-center relative group shadow-[0_0_20px_rgba(255,107,157,0.2)]">
                     <Mail className="w-7 h-7 text-love-pink group-hover:scale-110 transition-transform" />
                     <div className="absolute -top-1 -right-1 w-3 h-3 bg-love-pink rounded-full shadow-[0_0_6px_rgba(255,107,157,0.6)]" />
                   </div>

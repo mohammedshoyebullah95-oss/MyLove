@@ -350,7 +350,7 @@ export function Header({ className }: { className?: string }) {
         <button
           onClick={() => { playClick(); toggleAmbient(); }}
           className={`w-10 h-10 liquid-glass rounded-2xl flex items-center justify-center transition-all active:scale-90 ${isAmbientPlaying
-              ? "text-love-pink shadow-[0_0_12px_rgba(255,107,157,0.3)] animate-pulse-glow"
+              ? "text-love-pink shadow-[0_0_12px_rgba(255,107,157,0.3)]"
               : "text-eid-dark/60 hover:text-eid-dark"
             }`}
         >
