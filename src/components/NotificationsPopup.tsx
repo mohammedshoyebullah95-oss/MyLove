@@ -41,13 +41,13 @@ export function NotificationsPopup({ isOpen, onClose, notifications }: Notificat
                   <Bell className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-eid-dark">Notifications</h2>
-                  <p className="text-sm text-eid-dark/60 font-medium">Updates from the admin</p>
+                  <h2 className="text-2xl font-bold text-gray-900">Notifications</h2>
+                  <p className="text-sm text-gray-600 font-medium">Updates from the admin</p>
                 </div>
               </div>
               <button
                 onClick={onClose}
-                className="w-10 h-10 rounded-full flex items-center justify-center bg-black/5 text-eid-dark/40 hover:text-eid-dark hover:bg-black/10 transition-colors"
+                className="w-10 h-10 rounded-full flex items-center justify-center bg-black/5 text-gray-500 hover:text-gray-900 hover:bg-black/10 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -56,7 +56,7 @@ export function NotificationsPopup({ isOpen, onClose, notifications }: Notificat
             {/* Notifications List */}
             <div className="flex-1 overflow-y-auto pr-2 space-y-4 relative z-10 custom-scrollbar">
               {notifications.length === 0 ? (
-                <div className="h-full flex flex-col items-center justify-center text-center gap-4 text-eid-dark/40">
+                <div className="h-full flex flex-col items-center justify-center text-center gap-4 text-gray-500">
                   <div className="w-20 h-20 rounded-full bg-black/5 flex items-center justify-center">
                     <Bell className="w-10 h-10" />
                   </div>
@@ -71,13 +71,13 @@ export function NotificationsPopup({ isOpen, onClose, notifications }: Notificat
                     className="liquid-glass-subtle bg-white/40 rounded-2xl p-5 border border-black/5 group hover:border-eid-accent/30 transition-colors shadow-sm"
                   >
                     <div className="flex justify-between items-start mb-2">
-                      <h3 className="font-bold text-eid-dark/90 text-lg">{notif.title}</h3>
-                      <div className="flex items-center gap-1.5 text-[10px] font-bold text-eid-dark/50 uppercase tracking-widest bg-black/5 px-2 py-1 rounded-full">
+                      <h3 className="font-bold text-gray-800 text-lg">{notif.title}</h3>
+                      <div className="flex items-center gap-1.5 text-[10px] font-bold text-gray-500 uppercase tracking-widest bg-black/5 px-2 py-1 rounded-full">
                         <Clock className="w-3 h-3" />
                         {notif.timestamp?.toDate ? formatDistanceToNow(notif.timestamp.toDate(), { addSuffix: true }) : "Just now"}
                       </div>
                     </div>
-                    <p className="text-eid-dark/70 text-sm leading-relaxed">{notif.message}</p>
+                    <p className="text-gray-700 text-sm leading-relaxed">{notif.message}</p>
                   </motion.div>
                 ))
               )}
@@ -85,7 +85,7 @@ export function NotificationsPopup({ isOpen, onClose, notifications }: Notificat
 
             {/* Footer */}
             <div className="mt-8 pt-6 border-t border-black/5 relative z-10">
-              <p className="text-center text-[10px] font-bold text-eid-dark/40 uppercase tracking-[0.2em]">
+              <p className="text-center text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">
                 End of notifications
               </p>
             </div>
