@@ -82,7 +82,7 @@ export function LoveNotes({ onClose }: LoveNotesProps) {
 
       setNotes((prev) => [...prev.slice(-8), newNote]); // max 9 notes
       setTotalSpawned((prev) => prev + 1);
-    }, 1800);
+    }, 1000);
 
     return () => clearInterval(spawnInterval);
   }, [isGameOver]);
@@ -145,7 +145,7 @@ export function LoveNotes({ onClose }: LoveNotesProps) {
           updateData.completedActivities = arrayUnion("love-notes");
         }
 
-        if (score >= 10 && !completedActivities.includes("love-notes-perfect")) {
+        if (score >= 15 && !completedActivities.includes("love-notes-perfect")) {
           updateData.rewardAmount = increment(30);
           updateData.completedActivities = arrayUnion("love-notes-perfect");
         }
@@ -268,10 +268,10 @@ export function LoveNotes({ onClose }: LoveNotesProps) {
 
                 <div className="space-y-2">
                   <h3 className="text-3xl font-bold text-white">
-                    {score >= 10 ? "Amazing! 💕" : "Well Done!"}
+                    {score >= 15 ? "Amazing! 💕" : "Well Done!"}
                   </h3>
                   <p className="text-eid-gray font-medium">
-                    {score >= 10
+                    {score >= 15
                       ? "You caught so much love! ❤️"
                       : "Try again to catch more love notes! 💌"}
                   </p>

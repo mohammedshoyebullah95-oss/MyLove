@@ -226,7 +226,7 @@ export function GiftHunt({ onClose }: GiftHuntProps) {
 
             <div className="liquid-glass-strong p-6 rounded-3xl w-full space-y-6">
               <p className="text-lg font-serif italic text-center text-eid-dark/90">
-                "Where did we last celebrate Eid together?"
+                "What is your Husband's name?"
               </p>
 
               <div className="space-y-3">
@@ -275,7 +275,7 @@ export function GiftHunt({ onClose }: GiftHuntProps) {
               </div>
 
               <p className="text-xl font-serif italic text-center text-eid-dark/90 leading-relaxed relative z-10">
-                "I’m always near you when you rest,<br />
+                Riddle: "I’m always near you when you rest,<br />
                 beside your dreams, I hide your gifts. What am I?"
               </p>
 
