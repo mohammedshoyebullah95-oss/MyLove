@@ -10,6 +10,7 @@ import { useAudio } from "@/hooks/useAudio";
 import { RewardPopup } from "@/components/RewardPopup";
 import { db } from "@/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { LoginPrompt } from "@/components/LoginPrompt";
 
 // ─── 3D Tilt Hook ───
 function useTilt() {
@@ -62,6 +63,7 @@ const stagger = {
 export function Home() {
   const [activeGame, setActiveGame] = useState<string | null>(null);
   const [showReward, setShowReward] = useState(false);
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false);
 
   const { user, coins, rewardAmount, completedActivities } = useAuth();
   const { playClick } = useAudio();
@@ -70,7 +72,7 @@ export function Home() {
   const handleGameClick = (gameId: string) => {
     playClick();
     if (!user) {
-      alert("Please login to play and save your progress! ❤️");
+      setShowLoginPrompt(true);
       return;
     }
     setActiveGame(gameId);
@@ -101,6 +103,10 @@ export function Home() {
         onClose={() => setShowReward(false)}
         reward={rewardAmount}
         message="You're my greatest treasure!"
+      />
+      <LoginPrompt 
+        isOpen={showLoginPrompt} 
+        onClose={() => setShowLoginPrompt(false)} 
       />
 
       {/* Hero Section — Enhanced */}
