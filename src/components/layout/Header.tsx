@@ -114,13 +114,13 @@ export function Header({ className }: { className?: string }) {
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="w-full max-w-md liquid-glass-strong rounded-[32px] p-6 relative z-10 max-h-[85vh] flex flex-col overflow-hidden border border-white/20 shadow-2xl"
+              className="w-full max-w-md popup-glass rounded-[32px] p-6 relative z-10 max-h-[85vh] flex flex-col overflow-hidden border border-white/20 shadow-2xl"
             >
               <div className="flex items-start justify-between mb-6">
                 <h2 className="text-xl font-bold text-eid-dark">User Management</h2>
                 <button
                   onClick={() => setShowUserManagement(false)}
-                  className="w-8 h-8 liquid-glass rounded-full flex items-start justify-center text-eid-gray"
+                  className="w-8 h-8 rounded-full flex items-center justify-center bg-black/5 text-eid-dark/40 hover:text-eid-dark hover:bg-black/10 transition-colors"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -130,7 +130,7 @@ export function Header({ className }: { className?: string }) {
                 {allUsers.map((u) => (
                   <div
                     key={u.id}
-                    className="liquid-glass p-4 rounded-2xl border border-white/10 flex items-start justify-between gap-4"
+                    className="liquid-glass-subtle bg-white/40 p-4 rounded-2xl border border-black/5 flex items-start justify-between gap-4 shadow-sm hover:border-eid-accent/30 transition-colors"
                   >
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
@@ -144,8 +144,8 @@ export function Header({ className }: { className?: string }) {
                           <span className="text-[8px] font-bold bg-eid-accent/10 text-eid-accent px-1.5 py-0.5 rounded-full uppercase tracking-tighter">You</span>
                         )}
                       </div>
-                      <p className="text-[10px] text-eid-gray truncate opacity-70">{u.email}</p>
-                      <p className="text-[9px] font-mono text-eid-gray/50 truncate">ID: {u.uid}</p>
+                      <p className="text-[10px] text-eid-dark/60 truncate">{u.email}</p>
+                      <p className="text-[9px] font-mono text-eid-dark/40 truncate">ID: {u.uid}</p>
                       <div className="flex gap-3 mt-1">
                         <span className="text-[10px] font-bold text-eid-gold">Coins: {u.coins || 0}</span>
                         <span className="text-[10px] font-bold text-eid-accent">Reward: ${u.rewardAmount || 0}</span>
@@ -158,7 +158,7 @@ export function Header({ className }: { className?: string }) {
                         setEditCoins(u.coins || 0);
                         setEditReward(u.rewardAmount || 0);
                       }}
-                      className="p-2 liquid-glass-solid rounded-xl text-eid-accent"
+                      className="p-2 bg-black/5 hover:bg-black/10 transition-colors rounded-xl text-eid-accent"
                     >
                       <Edit2 className="w-4 h-4" />
                     </button>
@@ -182,23 +182,23 @@ export function Header({ className }: { className?: string }) {
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="w-full max-w-sm liquid-glass-strong rounded-[32px] p-8 relative z-10 border border-white/20 shadow-2xl"
+              className="w-full max-w-sm popup-glass rounded-[32px] p-8 relative z-10 border border-white/20 shadow-2xl"
             >
               <h3 className="text-lg font-bold text-eid-dark mb-6 text-center">Edit User Data</h3>
 
               <div className="space-y-6">
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-eid-gray uppercase tracking-widest">Coins</label>
+                  <label className="text-xs font-bold text-eid-dark/60 uppercase tracking-widest">Coins</label>
                   <div className="flex items-center gap-4">
                     <input
                       type="number"
                       value={editCoins}
                       onChange={(e) => setEditCoins(parseInt(e.target.value) || 0)}
-                      className="flex-1 bg-white/5 border border-eid-dark/10 rounded-xl p-3 text-eid-dark font-bold"
+                      className="flex-1 bg-black/5 border border-black/10 rounded-xl p-3 text-eid-dark font-bold"
                     />
                     <button
                       onClick={() => setEditCoins(0)}
-                      className="p-3 liquid-glass rounded-xl text-eid-rose"
+                      className="p-3 bg-black/5 hover:bg-black/10 transition-colors rounded-xl text-eid-rose"
                     >
                       <RotateCcw className="w-4 h-4" />
                     </button>
@@ -206,17 +206,17 @@ export function Header({ className }: { className?: string }) {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-eid-gray uppercase tracking-widest">Reward Amount ($)</label>
+                  <label className="text-xs font-bold text-eid-dark/60 uppercase tracking-widest">Reward Amount ($)</label>
                   <div className="flex items-center gap-4">
                     <input
                       type="number"
                       value={editReward}
                       onChange={(e) => setEditReward(parseInt(e.target.value) || 0)}
-                      className="flex-1 bg-white/5 border border-eid-dark/10 rounded-xl p-3 text-eid-dark font-bold"
+                      className="flex-1 bg-black/5 border border-black/10 rounded-xl p-3 text-eid-dark font-bold"
                     />
                     <button
                       onClick={() => setEditReward(0)}
-                      className="p-3 liquid-glass rounded-xl text-eid-rose"
+                      className="p-3 bg-black/5 hover:bg-black/10 transition-colors rounded-xl text-eid-rose"
                     >
                       <RotateCcw className="w-4 h-4" />
                     </button>
@@ -236,7 +236,7 @@ export function Header({ className }: { className?: string }) {
                 <div className="flex gap-3 pt-4">
                   <button
                     onClick={() => setEditingUser(null)}
-                    className="flex-1 py-4 liquid-glass rounded-2xl font-bold text-eid-gray"
+                    className="flex-1 py-4 bg-black/5 hover:bg-black/10 transition-colors rounded-2xl font-bold text-eid-dark/70"
                   >
                     Cancel
                   </button>
@@ -278,7 +278,7 @@ export function Header({ className }: { className?: string }) {
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="w-full max-w-sm liquid-glass-strong rounded-3xl p-6 relative z-10 border border-white/20 shadow-2xl"
+              className="w-full max-w-sm popup-glass rounded-3xl p-6 relative z-10 border border-white/20 shadow-2xl"
             >
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-xl font-bold flex items-center gap-2 text-eid-dark">
@@ -287,7 +287,7 @@ export function Header({ className }: { className?: string }) {
                 </h3>
                 <button
                   onClick={() => setShowAdmin(false)}
-                  className="text-eid-gray hover:text-eid-dark"
+                  className="text-eid-dark/40 hover:text-eid-dark"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -305,19 +305,19 @@ export function Header({ className }: { className?: string }) {
                 <div className="h-px bg-eid-dark/10 my-2" />
 
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold text-eid-gray uppercase tracking-widest">Broadcast Message</label>
+                  <label className="text-[10px] font-bold text-eid-dark/60 uppercase tracking-widest">Broadcast Message</label>
                   <input
                     type="text"
                     placeholder="Title"
                     value={adminTitle}
                     onChange={(e) => setAdminTitle(e.target.value)}
-                    className="w-full bg-white/5 border border-eid-dark/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-eid-accent/50"
+                    className="w-full bg-black/5 border border-black/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-eid-accent/50 text-eid-dark placeholder-eid-dark/30"
                   />
                   <textarea
                     placeholder="Message"
                     value={adminMessage}
                     onChange={(e) => setAdminMessage(e.target.value)}
-                    className="w-full bg-white/5 border border-eid-dark/10 rounded-xl px-4 py-3 text-sm h-24 resize-none focus:outline-none focus:ring-2 focus:ring-eid-accent/50"
+                    className="w-full bg-black/5 border border-black/10 rounded-xl px-4 py-3 text-sm h-24 resize-none focus:outline-none focus:ring-2 focus:ring-eid-accent/50 text-eid-dark placeholder-eid-dark/30"
                   />
                 </div>
                 <button

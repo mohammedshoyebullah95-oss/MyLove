@@ -44,9 +44,9 @@
 
 @utility liquid-glass-strong {
   background: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.9) 0%,
-      rgba(255, 255, 255, 0.9) 40%,
-      rgba(255, 255, 255, 0.9) 100%);
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.2) 40%,
+      rgba(255, 255, 255, 0.2) 100%);
   backdrop-filter: blur(60px) saturate(200%) brightness(1.15);
   -webkit-backdrop-filter: blur(60px) saturate(200%) brightness(1.15);
   border: 1px solid rgba(255, 255, 255, 0.22);
@@ -113,6 +113,16 @@
 @utility shimmer-border {
   position: relative;
   overflow: hidden;
+}
+
+@utility popup-glass {
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.85) 100%);
+  backdrop-filter: blur(50px) saturate(200%);
+  -webkit-backdrop-filter: blur(50px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
 }
 
 /* ─── Animations ─── */

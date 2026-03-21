@@ -64,7 +64,7 @@ export function NotificationManager() {
   if (!user) return null;
 
   return (
-    <div className="fixed bottom-6 left-6 z-50">
+    <div className="fixed bottom-24 left-6 z-50">
       <button
         onClick={requestPermission}
         className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all active:scale-95 ${permission === "granted"
