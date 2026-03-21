@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState, useEffect } from "react";
 
 // ─── Multiple Romantic Melodies ───
 
@@ -86,6 +86,22 @@ let ambientInterval: ReturnType<typeof setInterval> | null = null;
 let ambientPlaying = false;
 let currentMelodyIndex = -1;
 
+// ─── Shared SFX Context ───
+let sfxCtx: AudioContext | null = null;
+export function getSharedAudioCtx() {
+  if (typeof window === 'undefined') return null;
+  if (!sfxCtx) {
+    sfxCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+  }
+  if (sfxCtx.state === 'suspended') {
+    sfxCtx.resume().catch(() => {});
+  }
+  return sfxCtx;
+}
+
+let autoPlayInitialised = false;
+let manuallyMuted = false;
+
 function pickRandomMelody() {
   let idx = Math.floor(Math.random() * MELODIES.length);
   // Avoid repeating the same melody
@@ -101,7 +117,8 @@ export function useAudio() {
 
   const playOscillator = useCallback((freq: number, type: OscillatorType = 'sine', duration: number = 0.1, volume: number = 0.1) => {
     try {
-      const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const audioCtx = getSharedAudioCtx();
+      if (!audioCtx) return;
       const oscillator = audioCtx.createOscillator();
       const gainNode = audioCtx.createGain();
 
@@ -161,8 +178,14 @@ export function useAudio() {
     if (ambientPlaying) return;
 
     try {
-      ambientCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      if (!ambientCtx) {
+        ambientCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      }
+      if (ambientCtx.state === 'suspended') {
+        ambientCtx.resume().catch(() => {});
+      }
       ambientPlaying = true;
+      manuallyMuted = false;
       setIsAmbientPlaying(true);
 
       const playNextMelody = () => {
@@ -191,6 +214,7 @@ export function useAudio() {
 
   const stopAmbient = useCallback(() => {
     ambientPlaying = false;
+    manuallyMuted = true;
     setIsAmbientPlaying(false);
     if (ambientInterval) {
       clearInterval(ambientInterval);
@@ -209,6 +233,29 @@ export function useAudio() {
       startAmbient();
     }
   }, [startAmbient, stopAmbient]);
+
+  // Handle auto-play on first user interaction natively
+  useEffect(() => {
+    if (typeof window === 'undefined' || autoPlayInitialised) return;
+    autoPlayInitialised = true;
+
+    const handleFirstInteraction = () => {
+      // Start ambient music ONLY if it hasn't been started and wasn't explicitly muted by the user
+      if (!ambientPlaying && !manuallyMuted) {
+        startAmbient();
+      }
+      window.removeEventListener('pointerdown', handleFirstInteraction);
+      window.removeEventListener('keydown', handleFirstInteraction);
+    };
+
+    window.addEventListener('pointerdown', handleFirstInteraction);
+    window.addEventListener('keydown', handleFirstInteraction);
+
+    return () => {
+      window.removeEventListener('pointerdown', handleFirstInteraction);
+      window.removeEventListener('keydown', handleFirstInteraction);
+    };
+  }, [startAmbient]);
 
   return { playClick, playSuccess, playCoin, startAmbient, stopAmbient, toggleAmbient, isAmbientPlaying };
 }

@@ -2,7 +2,7 @@ import { Lightbulb, Heart, Coins, Star, Moon, Flower2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { TesterAgent } from "../components/TesterAgent";
 import { useAuth } from "@/context/AuthContext";
-import { useAudio } from "@/hooks/useAudio";
+import { useAudio, getSharedAudioCtx } from "@/hooks/useAudio";
 
 export function Game() {
   const { coins, completedActivities } = useAuth();
@@ -14,7 +14,8 @@ export function Game() {
 
   // Piano sound logic
   const playNote = (index: number) => {
-    const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const audioCtx = getSharedAudioCtx();
+    if (!audioCtx) return;
     const oscillator = audioCtx.createOscillator();
     const gainNode = audioCtx.createGain();
 

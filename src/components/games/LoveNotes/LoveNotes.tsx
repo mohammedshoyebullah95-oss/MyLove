@@ -23,6 +23,18 @@ const LOVE_NOTES = [
   "You make ordinary days extraordinary 🦋",
   "My love for you grows stronger each day 🌺",
   "Being with you is my favorite place 🏡",
+  "Jaaaaannnn Love you so much ❤️",
+  "A flying kiss to you 😘",
+  "You are my pumkin! 😉",
+  "I want to eat you out 😋",
+  "You look so pretty today 😍",
+  "I want to hug you so tight 🤗",
+  "I want to kiss you so hard 💋",
+  "I want to cuddle with you all day 💑",
+  "I want to sleep with you all night 😴",
+  "I want to wake up next to you every morning 🌅",
+  "I want to fall asleep in your arms every night 🌙",
+
 ];
 
 interface FallingNote {

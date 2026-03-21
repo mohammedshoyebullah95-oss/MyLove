@@ -133,9 +133,9 @@ export function Home() {
           variants={stagger.item}
           className="text-4xl font-bold text-eid-dark tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]"
         >
-          My Love 😘
-          <br />
           Eid Mubarak
+          <br />
+          My Love 😘
         </motion.h2>
 
         {/* Subtitle */}

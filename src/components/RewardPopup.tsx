@@ -18,7 +18,7 @@ export function RewardPopup({ isOpen, onClose, reward, message }: RewardPopupPro
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-eid-dark/60 backdrop-blur-md"
+            className="absolute inset-0 bg-eid-dark/80 backdrop-blur-md"
           />
 
           <motion.div
