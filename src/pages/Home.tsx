@@ -104,9 +104,9 @@ export function Home() {
         reward={rewardAmount}
         message="You're my greatest treasure!"
       />
-      <LoginPrompt 
-        isOpen={showLoginPrompt} 
-        onClose={() => setShowLoginPrompt(false)} 
+      <LoginPrompt
+        isOpen={showLoginPrompt}
+        onClose={() => setShowLoginPrompt(false)}
       />
 
       {/* Hero Section — Enhanced */}

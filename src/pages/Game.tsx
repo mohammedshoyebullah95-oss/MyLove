@@ -8,7 +8,7 @@ export function Game() {
   const { coins, completedActivities } = useAuth();
   const { playClick } = useAudio();
 
-  const totalActivities = 2;
+  const totalActivities = 3;
   const uniqueCompleted = Array.from(new Set(completedActivities.filter(id => !id.endsWith("-perfect")))).length;
   const progressPercent = (uniqueCompleted / totalActivities) * 100;
 
@@ -50,7 +50,7 @@ export function Game() {
         >
           <Heart className="w-4 h-4 text-eid-rose fill-eid-rose drop-shadow-[0_0_6px_rgba(244,114,182,0.5)]" />
           <span className="font-bold text-xs tracking-wider uppercase text-eid-dark/80">
-            {uniqueCompleted} Completed
+            {uniqueCompleted}
           </span>
         </motion.div>
         <motion.div
@@ -78,7 +78,7 @@ export function Game() {
           Ongoing Mission
         </span>
         <h2 className="text-2xl font-bold text-eid-dark tracking-tight">
-          {uniqueCompleted === totalActivities ? "All Missions Complete!" : `Mission ${uniqueCompleted + 1} of ${totalActivities}`}
+          {uniqueCompleted === totalActivities ? "All Missions Complete!" : `Mission ${uniqueCompleted} of ${totalActivities}`}
         </h2>
 
         {/* Progress Bar */}

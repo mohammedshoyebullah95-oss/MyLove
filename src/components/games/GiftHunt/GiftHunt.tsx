@@ -49,7 +49,7 @@ const SparkleIcon = ({ className }: { className?: string }) => (
 export function GiftHunt({ onClose }: GiftHuntProps) {
   const { user, coins: globalCoins, isAuthReady, completedActivities } = useAuth();
   const { playClick, playSuccess, playCoin } = useAudio();
-  
+
   const [currentLevel, setCurrentLevel] = useState<Level>(1);
   const [sessionCoins, setSessionCoins] = useState(0);
   const [tapCount, setTapCount] = useState(0);
@@ -68,7 +68,7 @@ export function GiftHunt({ onClose }: GiftHuntProps) {
     playSuccess();
     setSessionCoins(prev => prev + reward);
     setTapCount(0);
-    
+
     // Sync to Firestore
     if (user) {
       const userRef = doc(db, "users", user.uid);
@@ -90,7 +90,7 @@ export function GiftHunt({ onClose }: GiftHuntProps) {
         handleFirestoreError(error, OperationType.UPDATE, `users/${user.uid}`);
       }
     }
-    
+
     if (currentLevel < 4) {
       setTransitionMessage(transitionMessages[currentLevel - 1]);
       setIsTransitioning(true);
@@ -115,13 +115,13 @@ export function GiftHunt({ onClose }: GiftHuntProps) {
           </div>
           <h2 className="text-2xl font-bold text-eid-dark mb-2">Login Required</h2>
           <p className="text-eid-gray mb-8">Please login to save your progress and earn coins!</p>
-          <button 
+          <button
             onClick={() => { playClick(); signInWithGoogle(); }}
             className="w-full py-4 bg-eid-accent rounded-2xl font-bold text-white shadow-lg active:scale-95 transition-all"
           >
             Login with Google
           </button>
-          <button 
+          <button
             onClick={onClose}
             className="mt-4 text-eid-gray font-semibold text-sm"
           >
@@ -141,7 +141,7 @@ export function GiftHunt({ onClose }: GiftHuntProps) {
               <h3 className="text-xl font-bold text-eid-dark">Level 1</h3>
               <p className="text-eid-gray font-medium">Tap the moon 3 times 🌙</p>
             </div>
-            
+
             <motion.button
               whileTap={{ scale: 0.8, rotate: -10 }}
               onClick={() => {
@@ -159,11 +159,11 @@ export function GiftHunt({ onClose }: GiftHuntProps) {
                 "w-20 h-20 text-eid-gold-light fill-eid-gold-light transition-all duration-300",
                 tapCount > 0 && "scale-110 drop-shadow-[0_0_15px_rgba(212,168,83,0.6)]"
               )} />
-              
+
               {/* Tap indicators */}
               <div className="absolute -bottom-4 flex gap-2">
                 {[1, 2, 3].map((i) => (
-                  <div 
+                  <div
                     key={i}
                     className={cn(
                       "w-2.5 h-2.5 rounded-full transition-all duration-500",
@@ -228,7 +228,7 @@ export function GiftHunt({ onClose }: GiftHuntProps) {
               <p className="text-lg font-serif italic text-center text-eid-dark/90">
                 "Where did we last celebrate Eid together?"
               </p>
-              
+
               <div className="space-y-3">
                 <input
                   type="text"
@@ -273,12 +273,12 @@ export function GiftHunt({ onClose }: GiftHuntProps) {
               <div className="absolute top-0 right-0 p-4 opacity-10">
                 <Gift className="w-20 h-20" />
               </div>
-              
+
               <p className="text-xl font-serif italic text-center text-eid-dark/90 leading-relaxed relative z-10">
-                "I’m always near you when you rest,<br/>
+                "I’m always near you when you rest,<br />
                 beside your dreams, I hide your gift."
               </p>
-              
+
               <div className="mt-8 space-y-4 relative z-10">
                 <input
                   type="text"
@@ -287,7 +287,7 @@ export function GiftHunt({ onClose }: GiftHuntProps) {
                   placeholder="Where is it?"
                   className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-5 text-eid-dark placeholder:text-eid-gray/50 focus:outline-none focus:ring-2 focus:ring-eid-gold/50 transition-all"
                 />
-                
+
                 <button
                   onClick={() => {
                     playClick();
@@ -299,7 +299,7 @@ export function GiftHunt({ onClose }: GiftHuntProps) {
                   }}
                   className="w-full py-4 bg-gradient-to-r from-eid-gold to-eid-gold-dark rounded-2xl font-bold text-white shadow-lg active:scale-95 transition-all"
                 >
-                  I Found It!
+                  Done
                 </button>
               </div>
             </div>
@@ -348,16 +348,16 @@ export function GiftHunt({ onClose }: GiftHuntProps) {
     <div className="fixed inset-0 z-[60] flex flex-col bg-eid-bg overflow-hidden">
       {/* Mesh Background */}
       <div className="mesh-bg opacity-50" />
-      
+
       {/* Header */}
       <header className="relative z-10 flex items-center justify-between px-6 py-5 liquid-glass-strong border-b border-white/10">
-        <button 
+        <button
           onClick={() => { playClick(); onClose(); }}
           className="w-10 h-10 liquid-glass rounded-xl flex items-center justify-center text-eid-gray hover:text-eid-dark transition-colors"
         >
           <ArrowRight className="w-5 h-5 rotate-180" />
         </button>
-        
+
         <div className="flex flex-col items-center">
           <span className="text-[10px] font-black text-eid-accent tracking-[0.2em] uppercase">
             {currentLevel === 'final' ? 'MISSION COMPLETE' : `LEVEL 0${currentLevel}`}
@@ -400,7 +400,7 @@ export function GiftHunt({ onClose }: GiftHuntProps) {
             </span>
           </div>
           <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
-            <motion.div 
+            <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${((currentLevel as number - 1) / 4) * 100}%` }}
               className="h-full bg-gradient-to-r from-eid-accent to-eid-accent2 shadow-[0_0_10px_rgba(110,193,228,0.3)]"

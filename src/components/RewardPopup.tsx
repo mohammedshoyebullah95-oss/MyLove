@@ -20,7 +20,7 @@ export function RewardPopup({ isOpen, onClose, reward, message }: RewardPopupPro
             onClick={onClose}
             className="absolute inset-0 bg-eid-dark/60 backdrop-blur-md"
           />
-          
+
           <motion.div
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -37,7 +37,7 @@ export function RewardPopup({ isOpen, onClose, reward, message }: RewardPopupPro
                 <Gift className="w-10 h-10 text-white" />
               </div>
 
-              <h2 className="text-3xl font-bold text-eid-dark mb-2">Congratulations!</h2>
+              <h2 className="text-3xl font-bold text-pink-900 mb-2">Congratulations!</h2>
               <p className="text-eid-gray font-medium mb-6">You've unlocked a festive blessing</p>
 
               <div className="liquid-glass-subtle rounded-2xl p-6 mb-8 border border-white/20">
@@ -57,7 +57,7 @@ export function RewardPopup({ isOpen, onClose, reward, message }: RewardPopupPro
 
               <button
                 onClick={onClose}
-                className="w-full py-4 rounded-2xl bg-eid-dark text-white font-bold shadow-xl active:scale-95 transition-transform"
+                className="w-full py-4 bg-gradient-to-r from-eid-gold to-eid-gold-dark rounded-2xl font-bold text-white shadow-lg active:scale-95 transition-all"
               >
                 Amazing!
               </button>
@@ -65,7 +65,7 @@ export function RewardPopup({ isOpen, onClose, reward, message }: RewardPopupPro
 
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center bg-white/10 text-eid-dark/40 hover:text-eid-dark transition-colors"
+              className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center bg-white/10 text-gray-400 hover:text-red-900 transition-colors"
             >
               <X className="w-4 h-4" />
             </button>

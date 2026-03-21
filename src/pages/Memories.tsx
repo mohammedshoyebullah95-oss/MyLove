@@ -101,16 +101,53 @@ export function Memories() {
     25
   );
 
-  // Photos from /memories/ folder — user uploads manually
-  // Named: YYYY-MM-DD_Caption-text.jpg
+  // Photos from src/assets/memories/ folder — user uploads manually
+  // Example filename: 2024-05-15_Our-First-Date.jpg
+  // Will be shown correctly if they follow that format, or fallback to file name.
   const [photos, setPhotos] = useState<MemoryPhoto[]>([]);
 
   useEffect(() => {
-    // Try to load a manifest of photos
-    // For now, we'll show a helpful placeholder
-    // When photos exist in /memories/, they'll appear here
-    const samplePhotos: MemoryPhoto[] = [];
-    setPhotos(samplePhotos);
+    // Load photos dynamically from the assets directory using Vite's glob import
+    // @ts-ignore
+    const modules = import.meta.glob('/src/assets/memories/*.{png,jpg,jpeg,svg,webp,gif}', {
+      eager: true,
+      query: '?url',
+      import: 'default',
+    });
+
+    const parsedPhotos: MemoryPhoto[] = Object.entries(modules).map(([path, url]) => {
+      // e.g. path = "/src/assets/memories/2023-01-01_Happy-New-Year.jpg"
+      const filename = path.split('/').pop() || '';
+      const nameWithoutExt = filename.split('.').slice(0, -1).join('.');
+      
+      let dateStr = new Date().toISOString(); 
+      let caption = nameWithoutExt;
+
+      if (nameWithoutExt.includes('_')) {
+        const [d, ...c] = nameWithoutExt.split('_');
+        dateStr = d;
+        caption = c.join('_').replace(/-/g, ' ');
+      } else {
+        // Fallback if they didn't follow the format YYYY-MM-DD_Caption
+        caption = nameWithoutExt.replace(/[-_]/g, ' ');
+      }
+
+      // Validate date
+      const timestamp = Date.parse(dateStr);
+      if (isNaN(timestamp)) {
+        dateStr = new Date().toISOString();
+      }
+
+      return {
+        src: url as string,
+        date: dateStr,
+        caption: caption
+      };
+    });
+
+    // Sort newest to oldest
+    parsedPhotos.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+    setPhotos(parsedPhotos);
   }, []);
 
   return (
@@ -243,7 +280,7 @@ export function Memories() {
                   Beautiful photos of our journey together will appear here 💕
                 </p>
                 <p className="text-eid-gray/50 text-xs mt-4 font-mono">
-                  Add photos to /public/memories/
+                  Add photos to /src/assets/memories/
                 </p>
               </div>
             )}
