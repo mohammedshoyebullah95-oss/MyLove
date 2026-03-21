@@ -276,7 +276,7 @@ export function GiftHunt({ onClose }: GiftHuntProps) {
 
               <p className="text-xl font-serif italic text-center text-eid-dark/90 leading-relaxed relative z-10">
                 "I’m always near you when you rest,<br />
-                beside your dreams, I hide your gift."
+                beside your dreams, I hide your gifts. What am I?"
               </p>
 
               <div className="mt-8 space-y-4 relative z-10">
@@ -291,7 +291,8 @@ export function GiftHunt({ onClose }: GiftHuntProps) {
                 <button
                   onClick={() => {
                     playClick();
-                    if (userAnswer.toLowerCase().includes("bed") || userAnswer.toLowerCase().includes("drawer")) {
+                    const validAnswers = ["bed", "drawer", "closet", "table", "chair", "cabinet", "pillow", "phone", "draw"];
+                    if (validAnswers.some(answer => userAnswer.toLowerCase().includes(answer))) {
                       handleLevelComplete(25);
                     } else {
                       setError(true);

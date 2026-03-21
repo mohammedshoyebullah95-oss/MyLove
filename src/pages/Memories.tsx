@@ -109,7 +109,7 @@ export function Memories() {
   useEffect(() => {
     // Load photos dynamically from the assets directory using Vite's glob import
     // @ts-ignore
-    const modules = import.meta.glob('/src/assets/memories/*.{png,jpg,jpeg,svg,webp,gif}', {
+    const modules = import.meta.glob('/src/assets/memories/**/*.{png,jpg,jpeg,svg,webp,gif,PNG,JPG,JPEG,WEBP,GIF}', {
       eager: true,
       query: '?url',
       import: 'default',

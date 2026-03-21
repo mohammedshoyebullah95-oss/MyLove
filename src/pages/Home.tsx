@@ -82,6 +82,9 @@ export function Home() {
   const uniqueCompleted = Array.from(new Set(completedActivities.filter(id => !id.endsWith("-perfect")))).length;
   const availableActivities = 3; // Gift Hunt, Couple Quiz, and Love Notes
 
+  const isGame2Unlocked = completedActivities.includes("gift-hunt") || completedActivities.includes("gift-hunt-perfect");
+  const isGame3Unlocked = completedActivities.includes("couple-quiz") || completedActivities.includes("couple-quiz-perfect");
+
   return (
     <div className="px-5 py-4 flex flex-col gap-7 relative">
       {/* Game Overlays */}
@@ -321,45 +324,45 @@ export function Home() {
 
           {/* Activity 2 — Couple Quiz */}
           <motion.div
-            whileHover={{ x: 4 }}
-            onClick={() => handleGameClick("couple-quiz")}
-            className="liquid-glass rounded-[22px] p-4.5 flex items-center gap-4 group iridescent-border cursor-pointer"
+            whileHover={{ x: isGame2Unlocked ? 4 : 0 }}
+            onClick={() => isGame2Unlocked && handleGameClick("couple-quiz")}
+            className={`liquid-glass rounded-[22px] p-4.5 flex items-center gap-4 group iridescent-border ${isGame2Unlocked ? 'cursor-pointer' : 'opacity-70 grayscale-[30%]'}`}
           >
-            <div className="w-14 h-14 liquid-glass-subtle rounded-2xl flex items-center justify-center text-eid-gold group-hover:shadow-[0_0_16px_rgba(212,168,83,0.2)] transition-shadow">
-              <HelpCircle className="w-6 h-6" />
+            <div className={`w-14 h-14 liquid-glass-subtle rounded-2xl flex items-center justify-center ${isGame2Unlocked ? 'text-eid-gold group-hover:shadow-[0_0_16px_rgba(212,168,83,0.2)]' : 'text-eid-gray'} transition-shadow`}>
+              {isGame2Unlocked ? <HelpCircle className="w-6 h-6" /> : <Lock className="w-5 h-5 opacity-60" />}
             </div>
             <div className="flex-1">
-              <h4 className="text-base font-bold text-eid-dark/90">
+              <h4 className="text-base font-bold text-eid-dark/90 flex items-center gap-2">
                 Couple Quiz
               </h4>
               <p className="text-sm text-eid-gray font-medium">
-                How well do you know me?
+                {isGame2Unlocked ? "How well do you know me?" : "Complete Gift Hunt to unlock"}
               </p>
             </div>
-            <button className="w-11 h-11 rounded-full flex items-center justify-center bg-gradient-to-br from-eid-gold/30 to-eid-gold-dark/20 text-eid-gold shadow-[0_0_12px_rgba(212,168,83,0.15)] active:scale-90 transition-transform border border-white/10">
-              <Play className="w-4 h-4 fill-current" />
+            <button className={`w-11 h-11 rounded-full flex items-center justify-center border border-white/10 ${isGame2Unlocked ? 'bg-gradient-to-br from-eid-gold/30 to-eid-gold-dark/20 text-eid-gold shadow-[0_0_12px_rgba(212,168,83,0.15)] active:scale-90 transition-transform' : 'bg-white/5 text-eid-gray/40'}`}>
+              {isGame2Unlocked ? <Play className="w-4 h-4 fill-current" /> : <Lock className="w-3.5 h-3.5" />}
             </button>
           </motion.div>
 
-          {/* Activity 3 — Catch the Love Notes (NOW ACTIVE!) */}
+          {/* Activity 3 — Catch the Love Notes */}
           <motion.div
-            whileHover={{ x: 4 }}
-            onClick={() => handleGameClick("love-notes")}
-            className="liquid-glass rounded-[22px] p-4.5 flex items-center gap-4 group iridescent-border cursor-pointer"
+            whileHover={{ x: isGame3Unlocked ? 4 : 0 }}
+            onClick={() => isGame3Unlocked && handleGameClick("love-notes")}
+            className={`liquid-glass rounded-[22px] p-4.5 flex items-center gap-4 group iridescent-border ${isGame3Unlocked ? 'cursor-pointer' : 'opacity-70 grayscale-[30%]'}`}
           >
-            <div className="w-14 h-14 liquid-glass-subtle rounded-2xl flex items-center justify-center text-love-pink group-hover:shadow-[0_0_16px_rgba(255,107,157,0.2)] transition-shadow">
-              <MessageCircle className="w-6 h-6" />
+            <div className={`w-14 h-14 liquid-glass-subtle rounded-2xl flex items-center justify-center ${isGame3Unlocked ? 'text-love-pink group-hover:shadow-[0_0_16px_rgba(255,107,157,0.2)]' : 'text-eid-gray'} transition-shadow`}>
+              {isGame3Unlocked ? <MessageCircle className="w-6 h-6" /> : <Lock className="w-5 h-5 opacity-60" />}
             </div>
             <div className="flex-1">
-              <h4 className="text-base font-bold text-eid-dark/90">
-                Catch the Love Notes
+              <h4 className="text-base font-bold text-eid-dark/90 flex items-center gap-2">
+                Love Notes
               </h4>
               <p className="text-sm text-eid-gray font-medium">
-                Catch falling love messages! 💌
+                {isGame3Unlocked ? "Catch my flying messages" : "Complete Couple Quiz to unlock"}
               </p>
             </div>
-            <button className="w-11 h-11 rounded-full flex items-center justify-center bg-gradient-to-br from-love-pink/30 to-love-rose/20 text-love-pink shadow-[0_0_12px_rgba(255,107,157,0.15)] active:scale-90 transition-transform border border-white/10">
-              <Play className="w-4 h-4 fill-current" />
+            <button className={`w-11 h-11 rounded-full flex items-center justify-center border border-white/10 ${isGame3Unlocked ? 'bg-gradient-to-br from-love-pink/30 to-love-rose/20 text-love-pink shadow-[0_0_12px_rgba(255,107,157,0.15)] active:scale-90 transition-transform' : 'bg-white/5 text-eid-gray/40'}`}>
+              {isGame3Unlocked ? <Play className="w-4 h-4 fill-current" /> : <Lock className="w-3.5 h-3.5" />}
             </button>
           </motion.div>
         </div>
