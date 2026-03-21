@@ -141,15 +141,15 @@ export function Header({ className }: { className?: string }) {
                           {u.displayName || "Anonymous"}
                         </p>
                         {u.uid === user?.uid && (
-                          <span className="text-[8px] font-bold bg-eid-accent/10 text-eid-accent px-1.5 py-0.5 rounded-full uppercase tracking-tighter">You</span>
+                          <span className="text-[8px] font-bold bg-blue-500/10 text-blue-700 px-1.5 py-0.5 rounded-full uppercase tracking-tighter">You</span>
                         )}
                       </div>
                       <p className="text-[10px] text-eid-dark/60 truncate">{u.email}</p>
                       <p className="text-[9px] font-mono text-eid-dark/40 truncate">ID: {u.uid}</p>
                       <div className="flex gap-3 mt-1">
-                        <span className="text-[10px] font-bold text-eid-gold">Coins: {u.coins || 0}</span>
-                        <span className="text-[10px] font-bold text-eid-accent">Reward: ${u.rewardAmount || 0}</span>
-                        <span className="text-[10px] font-bold text-eid-rose">Done: {u.completedActivities?.length || 0}</span>
+                        <span className="text-[10px] font-bold text-amber-600">Coins: {u.coins || 0}</span>
+                        <span className="text-[10px] font-bold text-blue-600">Reward: ${u.rewardAmount || 0}</span>
+                        <span className="text-[10px] font-bold text-rose-600">Done: {u.completedActivities?.length || 0}</span>
                       </div>
                     </div>
                     <button
@@ -158,7 +158,7 @@ export function Header({ className }: { className?: string }) {
                         setEditCoins(u.coins || 0);
                         setEditReward(u.rewardAmount || 0);
                       }}
-                      className="p-2 bg-black/5 hover:bg-black/10 transition-colors rounded-xl text-eid-accent"
+                      className="p-2 bg-black/5 hover:bg-black/10 transition-colors rounded-xl text-blue-600"
                     >
                       <Edit2 className="w-4 h-4" />
                     </button>
@@ -226,7 +226,7 @@ export function Header({ className }: { className?: string }) {
                 <div className="pt-2">
                   <button
                     onClick={handleResetActivities}
-                    className="w-full py-3 liquid-glass-subtle border border-eid-rose/20 text-eid-rose rounded-xl text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-eid-rose/5 transition-colors"
+                    className="w-full py-3 bg-rose-50 border border-rose-200 text-rose-600 rounded-xl text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-rose-100 transition-colors"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
                     Reset All Activities
@@ -242,7 +242,7 @@ export function Header({ className }: { className?: string }) {
                   </button>
                   <button
                     onClick={handleUpdateUser}
-                    className="flex-1 py-4 bg-eid-accent text-white rounded-2xl font-bold flex items-center justify-center gap-2"
+                    className="flex-1 py-4 bg-gradient-to-r from-eid-accent to-eid-accent2 text-white shadow-[0_4px_12px_rgba(110,193,228,0.3)] rounded-2xl font-bold flex items-center justify-center gap-2 transition-transform active:scale-95"
                   >
                     <Save className="w-4 h-4" />
                     Save
@@ -278,7 +278,7 @@ export function Header({ className }: { className?: string }) {
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="w-full max-w-sm popup-glass rounded-3xl p-6 relative z-10 border border-white/20 shadow-2xl"
+              className="w-full max-w-sm popup-glass rounded-3xl p-6 relative z-10 border border-black/10 shadow-2xl"
             >
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-xl font-bold flex items-center gap-2 text-eid-dark">
@@ -296,7 +296,7 @@ export function Header({ className }: { className?: string }) {
               <div className="space-y-4">
                 <button
                   onClick={() => { playClick(); setShowUserManagement(true); setShowAdmin(false); }}
-                  className="w-full py-4 bg-eid-dark text-white rounded-2xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg"
+                  className="w-full py-4 bg-gradient-to-r from-love-pink to-love-rose text-white rounded-2xl font-bold text-sm flex items-center justify-center gap-2 shadow-[0_4px_12px_rgba(255,107,157,0.3)] transition-transform active:scale-95"
                 >
                   <Users className="w-5 h-5" />
                   User Management
@@ -322,7 +322,7 @@ export function Header({ className }: { className?: string }) {
                 </div>
                 <button
                   onClick={handleSendNotification}
-                  className="w-full bg-eid-accent text-white font-bold py-4 rounded-2xl shadow-lg active:scale-95 transition-transform flex items-center justify-center gap-2"
+                  className="w-full bg-gradient-to-r from-eid-accent to-eid-accent2 text-white font-bold py-4 rounded-2xl shadow-[0_4px_12px_rgba(110,193,228,0.3)] active:scale-95 transition-transform flex items-center justify-center gap-2"
                 >
                   <Play className="w-4 h-4" />
                   Send to All
@@ -393,17 +393,17 @@ export function Header({ className }: { className?: string }) {
                 initial={{ opacity: 0, y: 10, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                className="absolute right-0 mt-3 w-48 liquid-glass-strong rounded-2xl p-2 iridescent-border z-50"
+                className="absolute right-0 mt-3 w-48 popup-glass rounded-2xl p-2 border border-black/10 shadow-xl z-50"
               >
                 {user ? (
                   <>
-                    <div className="px-3 py-2 border-b border-white/10 mb-1">
+                    <div className="px-3 py-2 border-b border-black/5 mb-1">
                       <p className="text-xs font-bold text-eid-dark truncate">{user.displayName}</p>
                       <p className="text-[10px] text-eid-gray truncate">{user.email}</p>
                     </div>
                     <button
                       onClick={() => { playClick(); logout(); setShowProfile(false); }}
-                      className="w-full flex items-center gap-2 px-3 py-2 text-xs font-semibold text-eid-rose hover:bg-white/5 rounded-xl transition-colors"
+                      className="w-full flex items-center gap-2 px-3 py-2 text-xs font-semibold text-rose-600 hover:bg-black/5 rounded-xl transition-colors"
                     >
                       <LogOut className="w-3.5 h-3.5" />
                       Logout
@@ -412,7 +412,7 @@ export function Header({ className }: { className?: string }) {
                 ) : (
                   <button
                     onClick={() => { playClick(); signInWithGoogle(); setShowProfile(false); }}
-                    className="w-full flex items-center gap-2 px-3 py-2 text-xs font-semibold text-eid-accent hover:bg-white/5 rounded-xl transition-colors"
+                    className="w-full flex items-center gap-2 px-3 py-2 text-xs font-semibold text-blue-600 hover:bg-black/5 rounded-xl transition-colors"
                   >
                     <LogIn className="w-3.5 h-3.5" />
                     Login with Google
