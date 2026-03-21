@@ -81,7 +81,7 @@ export function GiftHunt({ onClose }: GiftHuntProps) {
         // If it's the final level, mark as completed and set the initial reward if not already done
         if (currentLevel === 4 && !completedActivities.includes("gift-hunt")) {
           updateData.completedActivities = arrayUnion("gift-hunt");
-          updateData.rewardAmount = increment(10);
+          updateData.rewardAmount = increment(1000);
         }
 
         await updateDoc(userRef, updateData);

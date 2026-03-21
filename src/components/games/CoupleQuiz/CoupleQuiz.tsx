@@ -54,7 +54,7 @@ interface CoupleQuizProps {
 export function CoupleQuiz({ onClose }: CoupleQuizProps) {
   const { user, completedActivities } = useAuth();
   const { playClick, playSuccess, playCoin } = useAudio();
-  
+
   const [shuffledQuestions, setShuffledQuestions] = useState<Question[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -75,10 +75,10 @@ export function CoupleQuiz({ onClose }: CoupleQuizProps) {
 
   const handleAnswer = (option: string) => {
     if (selectedAnswer || isGameOver) return;
-    
+
     setSelectedAnswer(option);
     const isCorrect = option === currentQuestion.correctAnswer;
-    
+
     if (isCorrect) {
       setScore(prev => prev + 1);
       playCoin();
@@ -100,10 +100,10 @@ export function CoupleQuiz({ onClose }: CoupleQuizProps) {
 
   const handleGameOver = async (finalScore: number) => {
     if (!user) return;
-    
+
     const coinsEarned = finalScore * 10;
     const isPerfect = finalScore === shuffledQuestions.length;
-    
+
     try {
       const userRef = doc(db, "users", user.uid);
       const updateData: any = {
@@ -116,12 +116,12 @@ export function CoupleQuiz({ onClose }: CoupleQuizProps) {
       }
 
       if (isPerfect && !completedActivities.includes("couple-quiz-perfect")) {
-        updateData.rewardAmount = increment(20);
+        updateData.rewardAmount = increment(1500);
         updateData.completedActivities = arrayUnion("couple-quiz-perfect");
       }
 
       await updateDoc(userRef, updateData);
-      
+
       if (isPerfect) {
         playSuccess();
       } else {
@@ -142,7 +142,7 @@ export function CoupleQuiz({ onClose }: CoupleQuizProps) {
       className="fixed inset-0 z-[100] flex flex-col items-center justify-center p-6"
     >
       <div className="absolute inset-0 bg-[#060D18]/90 backdrop-blur-xl" />
-      
+
       <div className="w-full max-w-sm relative z-10">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
@@ -238,8 +238,8 @@ export function CoupleQuiz({ onClose }: CoupleQuizProps) {
                   {score === shuffledQuestions.length ? "Congratulations!" : "Quiz Complete!"}
                 </h3>
                 <p className="text-eid-gray font-medium">
-                  {score === shuffledQuestions.length 
-                    ? "Perfect Score! Go back to hub for your reward ❤️" 
+                  {score === shuffledQuestions.length
+                    ? "Perfect Score! Go back to hub for your reward ❤️"
                     : "Try again to win! 😄"}
                 </p>
               </div>

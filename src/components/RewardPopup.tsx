@@ -42,7 +42,7 @@ export function RewardPopup({ isOpen, onClose, reward, message }: RewardPopupPro
 
               <div className="liquid-glass-subtle rounded-2xl p-6 mb-8 border border-white/20">
                 <div className="text-4xl font-black text-eid-gold mb-2 drop-shadow-[0_0_10px_rgba(212,168,83,0.3)]">
-                  ${reward}
+                  Rs.{reward}
                 </div>
                 <div className="text-sm font-bold text-eid-accent uppercase tracking-widest">
                   Reward Earned
