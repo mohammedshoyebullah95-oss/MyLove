@@ -93,15 +93,14 @@ export function CoupleQuiz({ onClose }: CoupleQuizProps) {
         setSelectedAnswer(null);
       } else {
         setIsGameOver(true);
-        handleGameOver();
+        handleGameOver(score + (isCorrect ? 1 : 0));
       }
     }, 1500);
   };
 
-  const handleGameOver = async () => {
+  const handleGameOver = async (finalScore: number) => {
     if (!user) return;
     
-    const finalScore = score + (selectedAnswer === currentQuestion?.correctAnswer ? 1 : 0);
     const coinsEarned = finalScore * 10;
     const isPerfect = finalScore === shuffledQuestions.length;
     
