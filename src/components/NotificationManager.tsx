@@ -34,7 +34,7 @@ export function NotificationManager() {
           if (now - ts < 60000) {
             new Notification(data.title || "New Update!", {
               body: data.message || "Check the app for details ❤️",
-              icon: "https://picsum.photos/seed/love/192/192"
+              icon: "/icon-romantic.png"
             });
           }
         }
@@ -56,7 +56,7 @@ export function NotificationManager() {
     if (result === "granted") {
       new Notification("Notifications Enabled!", {
         body: "You will now receive updates from the admin ❤️",
-        icon: "https://picsum.photos/seed/love/192/192"
+        icon: "/icon-romantic.png"
       });
     }
   };
